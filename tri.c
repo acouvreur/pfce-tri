@@ -12,26 +12,16 @@ int comp(const void *elem1, const void *elem2)
 
 void triInsertion(int *array, int size)
 {
-	int min, minPos;
-	for (int i = 0; i < size - 1; i++)
+	int x,j;
+	for (int i = 1; i < size - 1; i++)
 	{
-		//Recherce du minimum
-		min = array[i];
-		minPos = i;
-		for (int y = i + 1; y < size; y++)
-		{
-			if (array[y] < min)
-			{
-				min = array[y];
-				minPos = y;
-			}
+		x=array[i];
+		j=i;
+		while (j>0 && array[j-1]>x){
+			array[j]=array[j-1];
+			j--;
 		}
-		//Swap
-		if (minPos != i)
-		{
-			array[minPos] = array[i];
-			array[i] = min;
-		}
+		array[j]=x;
 	}
 }
 
