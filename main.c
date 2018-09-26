@@ -1,4 +1,5 @@
 #include "tri.h"
+#include "test.h"
 #include "generator.h"
 
 #define _POSIX_C_SOURCE 199309L
@@ -12,27 +13,27 @@ int main(int argc, char const *argv[])
 {
     if (argc == 1)
     {
-        if(!testTriInsertion())
+        if (!testTriInsertion())
         {
             fprintf(stderr, "Erreur testTriInsertion");
         }
-        if(!testTriFusion())
+        if (!testTriFusion())
         {
             fprintf(stderr, "Erreur testTriFusion");
         }
-        if(!testTriRapidePivotArbitraire())
+        if (!testTriRapidePivotArbitraire())
         {
             fprintf(stderr, "Erreur testTriRapidePivotArbitraire");
         }
-        if(!testTriRapidePivotAleatoire())
+        if (!testTriRapidePivotAleatoire())
         {
             fprintf(stderr, "Erreur testTriRapidePivotAleatoire");
         }
-        if(!testTriRapidePivotOptimal())
+        if (!testTriRapidePivotOptimal())
         {
             fprintf(stderr, "Erreur testTriRapidePivotOptimal");
         }
-        if(!testTriParTas())
+        if (!testTriParTas())
         {
             fprintf(stderr, "Erreur testTriParTas");
         }
