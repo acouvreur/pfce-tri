@@ -25,7 +25,7 @@ int *generateReverseSortedArray(int n)
 {
     int *array = initializeArray(n);
 
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
         array[i] = n - i;
     }
