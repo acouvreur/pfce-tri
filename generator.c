@@ -4,77 +4,90 @@
 
 #include "generator.h"
 
-int* initializeArray(int n) {
-    return (int*)malloc(sizeof(int)*n);
+int *initializeArray(int n)
+{
+    return (int *)malloc(sizeof(int) * n);
 }
 
-int* generateSortedArray(int n) {
-    int* array = initializeArray(n);
+int *generateSortedArray(int n)
+{
+    int *array = initializeArray(n);
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         array[i] = i;
     }
 
     return array;
 }
 
-int* generateReverseSortedArray(int n) {
-    int* array = initializeArray(n);
+int *generateReverseSortedArray(int n)
+{
+    int *array = initializeArray(n);
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         array[i] = n - i;
     }
 
     return array;
 }
 
-int* generateRandomizedArrayRangeN(int n) {
-    int* array = initializeArray(n);
+int *generateRandomizedArrayRangeN(int n)
+{
+    int *array = initializeArray(n);
 
     time_t t;
-    srand((unsigned) time(&t));
+    srand((unsigned)time(&t));
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         array[i] = rand() % n;
     }
 
     return array;
 }
 
-int* generateRandomizedArrayRangeLogN(int n) {
-    int* array = initializeArray(n);
+int *generateRandomizedArrayRangeLogN(int n)
+{
+    int *array = initializeArray(n);
 
     time_t t;
-    srand((unsigned) time(&t));
+    srand((unsigned)time(&t));
 
-    double dn = (double) n;
+    double dn = (double)n;
 
-    for(int i = 0; i < n; i++) {
-        array[i] = rand() % (int) log(dn);
+    for (int i = 0; i < n; i++)
+    {
+        array[i] = rand() % (int)log(dn);
     }
 
     return array;
 }
 
-int* generateRandomizedArrayRangeNSquare(int n) {
-    int* array = initializeArray(n);
+int *generateRandomizedArrayRangeNSquare(int n)
+{
+    int *array = initializeArray(n);
 
     time_t t;
-    srand((unsigned) time(&t));
+    srand((unsigned)time(&t));
 
-    int ns = n*n;
+    int ns = n * n;
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         array[i] = rand() % ns;
     }
 
     return array;
 }
 
-int* generateConstantArray(int n, int constant) {
-    int* array = initializeArray(n);
+int *generateConstantArray(int n, int constant)
+{
+    int *array = initializeArray(n);
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         array[i] = constant;
     }
 
