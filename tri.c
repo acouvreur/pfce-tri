@@ -100,3 +100,13 @@ void tamiser(int * tree, node, int n){
 		}
 	}
 }
+
+int comp (const void * elem1, const void * elem2){
+	int f = *((int*)elem1);
+    int s = *((int*)elem2);
+	return (f > s) - (f < s);
+}
+
+void sort(int * array){
+	qsort(array, sizeof(array)/sizeof(array[0]), sizeof(array[0]), comp);
+}
