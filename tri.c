@@ -66,3 +66,36 @@ void triFusion(int * array, int size){
 	}
 
 }
+
+void triParTas(int * tree, int size){
+	for(int i=size/2;i>=1;i--){
+		tamiser(tree,i,size);
+	}
+	int tmp;
+	for(int i=size;i>=2;i--){
+		tmp=tree[i-1];
+		tree[i-1]=tree[0];
+		tree[0]=tmp;
+		tamiser(tree,1,i-1);
+	}
+}
+
+void tamiser(int * tree, node, int n){
+	int k=node;
+	int j=2*k;
+	int tmp;
+	while(j<=n){
+		if(j<n && tree[j-1]<tree[j]){
+			j++;
+		}
+		if (tree[k-1]<tree[j-1]){
+			tmp=tree[k-1];
+			tree[k-1]=tree[j-1];
+			tree[j-1]=tmp;
+			k=j;
+			j=2*k;
+		}else {
+			j=n+1;
+		}
+	}
+}
