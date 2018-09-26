@@ -2,10 +2,11 @@
 #include "generator.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <time.h>
 
-int main(int argc, char[]* argv) {
+int main(int argc, char** argv) {
 	
 	if(argc==0){
 		int * arrayInsert = generateReverseSortedArray(100);
@@ -15,25 +16,25 @@ int main(int argc, char[]* argv) {
 		triInsertion(arrayInsert,100);
 		for(int i=0;i<100;i++){
 			if(arrayInsert[i]!=sorted[i]){
-				printf("Insert sort failed\n")
+				printf("Insert sort failed\n");
 				success = 0;
 				break;
 			}
 		}
 		if(success){
-			printf("Insert sort success\n")
+			printf("Insert sort success\n");
 		}
 		success=1;
 		triInsertion(arrayMerge,100);
 		for(int i=0;i<100;i++){
 			if(arrayMerge[i]!=sorted[i]){
-				printf("Merge sort failed\n")
+				printf("Merge sort failed\n");
 				success = 0;
 				break;
 			}
 		}
 		if(success){
-			printf("Merge sort success\n")
+			printf("Merge sort success\n");
 		}
 	}else if(argc!=3){
 		exit(2);
