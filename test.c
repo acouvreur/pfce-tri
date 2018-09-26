@@ -1,6 +1,7 @@
 #include "generator.h"
+#include "tri.h"
 
-// Return 0 for success, other for failure
+// Return 1 for success, 0 for failure
 
 int testTriInsertion() {
 

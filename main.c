@@ -15,27 +15,27 @@ int main(int argc, char const *argv[])
     {
         if (!testTriInsertion())
         {
-            fprintf(stderr, "Erreur testTriInsertion");
+            fprintf(stderr, "Erreur testTriInsertion\n");
         }
         if (!testTriFusion())
         {
-            fprintf(stderr, "Erreur testTriFusion");
+            fprintf(stderr, "Erreur testTriFusion\n");
         }
         if (!testTriRapidePivotArbitraire())
         {
-            fprintf(stderr, "Erreur testTriRapidePivotArbitraire");
+            fprintf(stderr, "Erreur testTriRapidePivotArbitraire\n");
         }
         if (!testTriRapidePivotAleatoire())
         {
-            fprintf(stderr, "Erreur testTriRapidePivotAleatoire");
+            fprintf(stderr, "Erreur testTriRapidePivotAleatoire\n");
         }
         if (!testTriRapidePivotOptimal())
         {
-            fprintf(stderr, "Erreur testTriRapidePivotOptimal");
+            fprintf(stderr, "Erreur testTriRapidePivotOptimal\n");
         }
         if (!testTriParTas())
         {
-            fprintf(stderr, "Erreur testTriParTas");
+            fprintf(stderr, "Erreur testTriParTas\n");
         }
     }
     else if (argc != 4)
