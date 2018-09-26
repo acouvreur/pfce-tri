@@ -1,3 +1,4 @@
+#include "tri.h"
 
 void triInsertion(int * array, int size){
 	int min,minPos;
