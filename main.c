@@ -12,33 +12,30 @@ int main(int argc, char const *argv[])
 {
     if (argc == 1)
     {
-        int * arrayInsert = generateReverseSortedArray(100);
-		int * arrayMerge = generateReverseSortedArray(100);
-		int * sorted = generateSortedArray(100);
-		int success=1;
-		triInsertion(arrayInsert,100);
-		for(int i=0;i<100;i++){
-			if(arrayInsert[i]!=sorted[i]){
-				printf("Insert sort failed\n");
-				success = 0;
-				break;
-			}
-		}
-		if(success){
-			printf("Insert sort success\n");
-		}
-		success=1;
-		triInsertion(arrayMerge,100);
-		for(int i=0;i<100;i++){
-			if(arrayMerge[i]!=sorted[i]){
-				printf("Merge sort failed\n");
-				success = 0;
-				break;
-			}
-		}
-		if(success){
-			printf("Merge sort success\n");
-		}
+        if(!testTriInsertion())
+        {
+            fprintf(stderr, "Erreur testTriInsertion");
+        }
+        if(!testTriFusion())
+        {
+            fprintf(stderr, "Erreur testTriFusion");
+        }
+        if(!testTriRapidePivotArbitraire())
+        {
+            fprintf(stderr, "Erreur testTriRapidePivotArbitraire");
+        }
+        if(!testTriRapidePivotAleatoire())
+        {
+            fprintf(stderr, "Erreur testTriRapidePivotAleatoire");
+        }
+        if(!testTriRapidePivotOptimal())
+        {
+            fprintf(stderr, "Erreur testTriRapidePivotOptimal");
+        }
+        if(!testTriParTas())
+        {
+            fprintf(stderr, "Erreur testTriParTas");
+        }
     }
     else if (argc != 4)
     {
