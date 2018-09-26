@@ -30,7 +30,7 @@ int testTriFusion() {
 int testTriRapidePivotArbitraire() {
 	int * array = generateReverseSortedArray(100);
 	int * sorted = generateSortedArray(100);
-	triRapidePivotArbitraire(array,0,100);
+	triRapidePivotArbitraire(array,0, 99);
 	for(int i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
 			return 0;
@@ -42,7 +42,7 @@ int testTriRapidePivotArbitraire() {
 int testTriRapidePivotAleatoire() {
 	int * array = generateReverseSortedArray(100);
 	int * sorted = generateSortedArray(100);
-	triRapidePivotAleatoire(array,0,100);
+	triRapidePivotAleatoire(array,0,99);
 	for(int i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
 			return 0;
@@ -54,7 +54,7 @@ int testTriRapidePivotAleatoire() {
 int testTriRapidePivotOptimal() {
 	int * array = generateReverseSortedArray(100);
 	int * sorted = generateSortedArray(100);
-	triRapidePivotOptimal(array,0,100);
+	triRapidePivotOptimal(array,0,99);
 	for(int i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
 			return 0;
