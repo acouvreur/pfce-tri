@@ -103,7 +103,7 @@ int pivotArbitraire(int *array, int start, int end)
 	// return end;
 	// return end - start;
 
-	return start;
+	return array[start];
 }
 
 int pivotAleatoire(int *array, int start, int end)
@@ -111,7 +111,7 @@ int pivotAleatoire(int *array, int start, int end)
 	return (rand() % end) + start;
 }
 
-int swap(int *i, int *j)
+void swap(int *i, int *j)
 {
 	int tmp = *i;
 	*i = *j;
@@ -131,6 +131,7 @@ int partitionner(int *array, int start, int end, int pivot)
 		}
 	}
 	swap(&array[end], &array[start]);
+	return start;
 }
 
 void triRapidePivotArbitraire(int *array, int start, int end)
