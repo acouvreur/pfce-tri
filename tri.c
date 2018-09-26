@@ -13,7 +13,7 @@ int comp(const void *elem1, const void *elem2)
 void triInsertion(int *array, int size)
 {
 	int x,j;
-	for (int i = 1; i < size - 1; i++)
+	for (int i = 1; i < size; i++)
 	{
 		x=array[i];
 		j=i;
