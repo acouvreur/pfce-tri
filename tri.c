@@ -3,6 +3,13 @@
 #include <time.h>
 #include <math.h>
 
+int comp(const void *elem1, const void *elem2)
+{
+	int f = *((int *)elem1);
+	int s = *((int *)elem2);
+	return (f > s) - (f < s);
+}
+
 void triInsertion(int *array, int size)
 {
 	int min, minPos;
@@ -171,21 +178,6 @@ void triRapidePivotOptimal(int *array, int start, int end)
 	}
 }
 
-void triParTas(int *tree, int size)
-{
-	for (int i = size / 2; i >= 1; i--)
-	{
-		tamiser(tree, i, size);
-	}
-	int tmp;
-	for (int i = size; i >= 2; i--)
-	{
-		tmp = tree[i - 1];
-		tree[i - 1] = tree[0];
-		tree[0] = tmp;
-		tamiser(tree, 1, i - 1);
-	}
-}
 
 void tamiser(int *tree, int node, int n)
 {
@@ -213,11 +205,20 @@ void tamiser(int *tree, int node, int n)
 	}
 }
 
-int comp(const void *elem1, const void *elem2)
+void triParTas(int *tree, int size)
 {
-	int f = *((int *)elem1);
-	int s = *((int *)elem2);
-	return (f > s) - (f < s);
+	for (int i = size / 2; i >= 1; i--)
+	{
+		tamiser(tree, i, size);
+	}
+	int tmp;
+	for (int i = size; i >= 2; i--)
+	{
+		tmp = tree[i - 1];
+		tree[i - 1] = tree[0];
+		tree[0] = tmp;
+		tamiser(tree, 1, i - 1);
+	}
 }
 
 void sort(int *array)

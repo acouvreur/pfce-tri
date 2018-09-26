@@ -10,9 +10,35 @@
 
 int main(int argc, char const *argv[])
 {
-    if (argc == 0)
+    if (argc == 1)
     {
-        //Execute test
+        int * arrayInsert = generateReverseSortedArray(100);
+		int * arrayMerge = generateReverseSortedArray(100);
+		int * sorted = generateSortedArray(100);
+		int success=1;
+		triInsertion(arrayInsert,100);
+		for(int i=0;i<100;i++){
+			if(arrayInsert[i]!=sorted[i]){
+				printf("Insert sort failed\n");
+				success = 0;
+				break;
+			}
+		}
+		if(success){
+			printf("Insert sort success\n");
+		}
+		success=1;
+		triInsertion(arrayMerge,100);
+		for(int i=0;i<100;i++){
+			if(arrayMerge[i]!=sorted[i]){
+				printf("Merge sort failed\n");
+				success = 0;
+				break;
+			}
+		}
+		if(success){
+			printf("Merge sort success\n");
+		}
     }
     else if (argc != 4)
     {
