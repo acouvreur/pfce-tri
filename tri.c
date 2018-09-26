@@ -35,19 +35,6 @@ void triInsertion(int *array, int size)
 	}
 }
 
-void triFusion(int *array, int size)
-{
-	if (size <= 1)
-	{ //Tableau de taille 1 deja trie
-		return;
-	}
-	int *buffer = malloc(sizeof(int) * size);
-	triFusion2(array, size, buffer);
-	for (int i = 0; i < size; i++)
-	{
-		array[i] = buffer[i];
-	}
-}
 
 void triFusion2(int *array, int size, int *buffer)
 {
@@ -98,6 +85,20 @@ void triFusion2(int *array, int size, int *buffer)
 				y++;
 			}
 		}
+	}
+}
+
+void triFusion(int *array, int size)
+{
+	if (size <= 1)
+	{ //Tableau de taille 1 deja trie
+		return;
+	}
+	int *buffer = malloc(sizeof(int) * size);
+	triFusion2(array, size, buffer);
+	for (int i = 0; i < size; i++)
+	{
+		array[i] = buffer[i];
 	}
 }
 
