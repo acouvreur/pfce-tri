@@ -20,7 +20,7 @@ void triInsertion(int * array, int size){
 
 
 void triFusion(int * array, int size){
-	if(size==1){ //Tableau de taille 1 deja trie
+	if(size<=1){ //Tableau de taille 1 deja trie
 		return;
 	}
 	else {
@@ -65,4 +65,59 @@ void triFusion(int * array, int size){
 		free(newArray1);free(newArray2);
 	}
 
+}
+
+/*---------------------------------------------------*/
+/*---------------  QUICKSORT   ----------------------*/
+/*---------------------------------------------------*/
+/*---------------------------------------------------*/
+
+int pivotArbitraire(int* array, int start, int end) {
+	// return start;
+	// return end;
+	// return end - start;
+
+	return start;
+}
+
+int pivotAleatoire(int* array, int start, int end) {
+	return (rand() % end) + start;
+}
+
+int swap(int* i, int* j) {
+	int tmp = *i;
+	*i = *j;
+	*j = tmp;
+}
+
+int partitionner(int* array, int start, int end, int pivot) {
+	swap(&array[pivot], &array[end]);
+
+	for (int i = start; i < end; i++) {
+		if(array[i] <= array[end]) {
+			swap(&array[i], &array[start]);
+			start++;
+		}
+	}
+	swap(&array[end], &array[start]);
+}
+
+void triRapidePivotArbitraire(int * array, int start, int end) {
+	int pivot;
+	if(start < end) {
+		pivot = pivotArbitraire(array, start, end);
+		pivot = partitionner(array, start, end, pivot);
+		triRapidePivotArbitraire(array, start, pivot-1);
+		triRapidePivotArbitraire(array, pivot+1, end);
+	}
+}
+
+void triRapidePivotAleatoire(int * array, int start, int end) {
+	int pivot;
+	if(start < end) {
+		pivot = pivotArbitraire(array, start, end);
+		pivot = partitionner(array, start, end, pivot);
+		triRapidePivotArbitraire(array, start, pivot-1);
+		triRapidePivotArbitraire(array, pivot+1, end);
+	}
 }
