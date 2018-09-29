@@ -39,10 +39,10 @@ void triFusion2(int *array, int size, int *buffer)
 		int newSize2 = size / 2 + size % 2;
 
 		int *newArray1 = array;
-		int *newArray2 = &(array[newSize1]);
+		int *newArray2 = array+newSize1;
 		//Trie nouveau tableaux par recursion
 		triFusion2(newArray1, newSize1, buffer);
-		triFusion2(newArray2, newSize2, &(buffer[newSize1]));
+		triFusion2(newArray2, newSize2, buffer+newSize1);
 		//Fusion des 2 tableau trie
 		int i = 0;
 		int y = 0;
