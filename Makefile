@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-Wall -lm -std=c99
-DEPS = generator.h tri.h
-OBJ = generator.o tri.o main.o 
+DEPS = generator.h tri.h test.h
+OBJ = generator.o tri.o test.o main.o 
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
