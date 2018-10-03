@@ -25,6 +25,25 @@ void triInsertion(int *array, int size)
 	}
 }
 
+void mergeArray(int* array1,int size1,int* array2,int size2,int* buffer){
+	int i = 0;
+	int y = 0;
+	for(int z=size1+size2-1;z>=0;z--){
+		if(i==size1){
+			buffer[z]=array2[y];
+			y++;
+		}else if(y==size2){
+			buffer[z]=array1[i];
+			i++;
+		}else if(array1[i] > array2[y]){
+			buffer[z]=array1[i];
+			i++;
+		}else {
+			buffer[z]=array2[y];
+			y++;
+		}
+	}
+}
 
 void triFusion2(int *array, int size, int *buffer)
 {
@@ -44,37 +63,7 @@ void triFusion2(int *array, int size, int *buffer)
 		triFusion2(newArray1, newSize1, buffer);
 		triFusion2(newArray2, newSize2, buffer+newSize1);
 		//Fusion des 2 tableau trie
-		int i = 0;
-		int y = 0;
-		while (i + y < size)
-		{
-			if (i < newSize1)
-			{
-				if (y < newSize2)
-				{
-					if (newArray1[i] <= newArray2[y])
-					{
-						buffer[i + y] = newArray1[i];
-						i++;
-					}
-					else
-					{
-						buffer[i + y] = newArray2[y];
-						y++;
-					}
-				}
-				else
-				{
-					buffer[i + y] = newArray1[i];
-					i++;
-				}
-			}
-			else
-			{
-				buffer[i + y] = newArray2[y];
-				y++;
-			}
-		}
+		mergeArray(newArray1,newSize1,newArray2,newSize2,buffer);
 	}
 }
 
