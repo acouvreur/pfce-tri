@@ -28,14 +28,14 @@ void triInsertion(int *array, int size)
 void mergeArray(int* array1,int size1,int* array2,int size2,int* buffer){
 	int i = 0;
 	int y = 0;
-	for(int z=size1+size2-1;z>=0;z--){
+	for(int z=0;z<size1+size2;z++){
 		if(i==size1){
 			buffer[z]=array2[y];
 			y++;
 		}else if(y==size2){
 			buffer[z]=array1[i];
 			i++;
-		}else if(array1[i] > array2[y]){
+		}else if(array1[i] < array2[y]){
 			buffer[z]=array1[i];
 			i++;
 		}else {
@@ -64,6 +64,10 @@ void triFusion2(int *array, int size, int *buffer)
 		triFusion2(newArray2, newSize2, buffer+newSize1);
 		//Fusion des 2 tableau trie
 		mergeArray(newArray1,newSize1,newArray2,newSize2,buffer);
+		for (int i = 0; i < size; i++)
+		{
+			array[i] = buffer[i];
+		}
 	}
 }
 
@@ -75,10 +79,6 @@ void triFusion(int *array, int size)
 	}
 	int *buffer = malloc(sizeof(int) * size);
 	triFusion2(array, size, buffer);
-	for (int i = 0; i < size; i++)
-	{
-		array[i] = buffer[i];
-	}
 }
 
 /*---------------------------------------------------*/
