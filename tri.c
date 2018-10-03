@@ -65,6 +65,7 @@ void triFusion2(long *array, long size, long *buffer)
 		triFusion2(newArray2, newSize2, buffer+newSize1);
 		//Fusion des 2 tableau trie
 		mergeArray(newArray1,newSize1,newArray2,newSize2,buffer);
+
 	}
 }
 
