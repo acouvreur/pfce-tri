@@ -205,7 +205,7 @@ void triParTas(int *tree, int size)
 	}
 }
 
-void sort(int *array)
+void sort(int *array,int size)
 {
-	qsort(array, sizeof(array) / sizeof(array[0]), sizeof(array[0]), comp);
+	qsort(array, size, sizeof(int), comp);
 }

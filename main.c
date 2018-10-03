@@ -37,6 +37,10 @@ int main(int argc, char const *argv[])
         {
             fprintf(stderr, "Erreur testTriParTas\n");
         }
+		if (!testQSort())
+        {
+            fprintf(stderr, "Erreur testQSort\n");
+        }
     }
     else if (argc != 4)
     {
@@ -100,7 +104,7 @@ int main(int argc, char const *argv[])
             break;
         case 6:
             clock_gettime(CLOCK_MONOTONIC, &t1);
-            sort(array);
+            sort(array, n);
             clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         }
