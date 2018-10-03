@@ -8,7 +8,13 @@ tris = "triInsertion triFusion triParTas triRapidePivotArbitraire triRapidePivot
 
 set title "Evaluation du temps de tri ".word(gen, gen_algo)
 
+
+
 # plot "benchmark.dat" using 3:4
 plot for [i=1:6] 'data/benchmark_'.i.'_'.gen_algo.'.dat' using 3:4 smooth unique title word(tris, i)
 
 pause -1 "Hit any key to continue"
+
+set term png
+set output 'output/benchmark_'.gen_algo.'.png'
+replot
