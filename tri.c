@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <stdio.h>
 
 int comp(const void *elem1, const void *elem2)
 {
@@ -91,8 +92,7 @@ int pivotArbitraire(int *array, int start, int end)
 	// return start;
 	// return end;
 	// return end - start;
-
-	return array[start];
+	return start + ((end - start) / 2);
 }
 
 int pivotAleatoire(int *array, int start, int end)
@@ -102,13 +102,16 @@ int pivotAleatoire(int *array, int start, int end)
 
 void swap(int *i, int *j)
 {
+	// printf("swap %d<=>%d\n", *i, *j);
 	int tmp = *i;
 	*i = *j;
 	*j = tmp;
+	// printf("swapresult %d<=>%d\n", *i, *j);
 }
 
 int partitionner(int *array, int start, int end, int pivot)
 {
+	// printf("swap indexes %d %d (from total range %d %d)\n", pivot, end, start, end);
 	swap(&array[pivot], &array[end]);
 
 	for (int i = start; i < end; i++)
@@ -140,7 +143,7 @@ void triRapidePivotAleatoire(int *array, int start, int end)
 	int pivot;
 	if (start < end)
 	{
-		pivot = pivotArbitraire(array, start, end);
+		pivot = pivotAleatoire(array, start, end);
 		pivot = partitionner(array, start, end, pivot);
 		triRapidePivotArbitraire(array, start, pivot - 1);
 		triRapidePivotArbitraire(array, pivot + 1, end);
