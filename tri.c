@@ -93,7 +93,7 @@ long pivotArbitraire(long *array, long start, long end)
 	// return start;
 	// return end;
 	// return end - start;
-	return start + ((end - start) / 2);
+	return (start + end) / 2;
 }
 
 long pivotAleatoire(long *array, long start, long end)

@@ -109,7 +109,8 @@ int main(int argc, char const *argv[])
             clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         }
-        long ns = (long) ((((double)t2.tv_sec + 1.0e-9*t2.tv_nsec) - ((double)t1.tv_sec + 1.0e-9*t1.tv_nsec)) * 1000000000);printf("%ld\n", ns);
+        double ns = (((double)t2.tv_sec + 1.0e-9*t2.tv_nsec) - ((double)t1.tv_sec + 1.0e-9*t1.tv_nsec));
+        printf("%0.9f\n", ns);
     }
     return 0;
 }

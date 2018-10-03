@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -g -lm -lrt -std=c99 -O3
+CFLAGS=-Wall -g -lm -lrt -std=c11 -O3
 DEPS = generator.h tri.h test.h
 OBJ = generator.o tri.o test.o main.o 
 

@@ -15,6 +15,6 @@ plot for [i=1:6] 'data/benchmark_'.i.'_'.gen_algo.'.dat' using 3:4 smooth unique
 
 pause -1 "Hit any key to continue"
 
-set term png
-set output 'output/benchmark_'.gen_algo.'.png'
+set term pdf
+set output 'output/benchmark_'.gen_algo.'.pdf'
 replot
