@@ -78,37 +78,37 @@ int main(int argc, char const *argv[])
         switch (sortingAlgo)
         {
         case 1:
-            clock_gettime(CLOCK_REALTIME, &t1);
+            clock_gettime(CLOCK_MONOTONIC, &t1);
             triInsertion(array, n);
-            clock_gettime(CLOCK_REALTIME, &t2);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         case 2:
-            clock_gettime(CLOCK_REALTIME, &t1);
+            clock_gettime(CLOCK_MONOTONIC, &t1);
             triFusion(array, n);
-            clock_gettime(CLOCK_REALTIME, &t2);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         case 3:
-            clock_gettime(CLOCK_REALTIME, &t1);
+            clock_gettime(CLOCK_MONOTONIC, &t1);
             triParTas(array, n);
-            clock_gettime(CLOCK_REALTIME, &t2);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         case 4:
-            clock_gettime(CLOCK_REALTIME, &t1);
-            //quicksort(array,n);
-            clock_gettime(CLOCK_REALTIME, &t2);
+            clock_gettime(CLOCK_MONOTONIC, &t1);
+            triRapidePivotArbitraire(array, 0, n-1);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         case 5:
-            clock_gettime(CLOCK_REALTIME, &t1);
-            //smoothsort(array,n);
-            clock_gettime(CLOCK_REALTIME, &t2);
+            clock_gettime(CLOCK_MONOTONIC, &t1);
+            triRapidePivotAleatoire(array, 0, n-1);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         case 6:
-            clock_gettime(CLOCK_REALTIME, &t1);
-            sort(array,n);
-            clock_gettime(CLOCK_REALTIME, &t2);
+            clock_gettime(CLOCK_MONOTONIC, &t1);
+            sort(array, n);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         }
-        long ns = t2.tv_nsec - t1.tv_nsec;
+        long ns = (long) ((((double)t2.tv_sec + 1.0e-9*t2.tv_nsec) - ((double)t1.tv_sec + 1.0e-9*t1.tv_nsec)) * 1000000000);
         printf("%ld\n", ns);
     }
     return 0;
