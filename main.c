@@ -13,33 +13,34 @@ int main(int argc, char const *argv[])
 {
     if (argc == 1)
     {
-        if (!testTriInsertion())
+        int err;
+        if ((err=testTriInsertion()))
         {
-            fprintf(stderr, "Erreur testTriInsertion\n");
+            fprintf(stderr, "Erreur testTriInsertion (%d)\n", err);
         }
-        if (!testTriFusion())
+        if ((err=testTriFusion()))
         {
-            fprintf(stderr, "Erreur testTriFusion\n");
+            fprintf(stderr, "Erreur testTriFusion (%d)\n", err);
         }
-        if (!testTriRapidePivotArbitraire())
+        if ((err=testTriRapidePivotArbitraire()))
         {
-            fprintf(stderr, "Erreur testTriRapidePivotArbitraire\n");
+            fprintf(stderr, "Erreur testTriRapidePivotArbitraire (%d)\n", err);
         }
-        if (!testTriRapidePivotAleatoire())
+        if ((err=testTriRapidePivotAleatoire()))
         {
-            fprintf(stderr, "Erreur testTriRapidePivotAleatoire\n");
+            fprintf(stderr, "Erreur testTriRapidePivotAleatoire (%d)\n", err);
         }
-        if (!testTriRapidePivotOptimal())
+        if ((err=testTriRapidePivotOptimal()))
         {
-            fprintf(stderr, "Erreur testTriRapidePivotOptimal\n");
+            fprintf(stderr, "Erreur testTriRapidePivotOptimal (%d)\n", err);
         }
-        if (!testTriParTas())
+        if ((err=testTriParTas()))
         {
-            fprintf(stderr, "Erreur testTriParTas\n");
+            fprintf(stderr, "Erreur testTriParTas (%d)\n", err);
         }
-		if (!testQSort())
+		if (testQSort())
         {
-            fprintf(stderr, "Erreur testQSort\n");
+            fprintf(stderr, "Erreur testQSort (%d)\n", err);
         }
     }
     else if (argc != 4)
@@ -50,8 +51,8 @@ int main(int argc, char const *argv[])
     {
         int sortingAlgo = atoi(argv[1]);
         int generatorAlgo = atoi(argv[2]);
-        int n = atoi(argv[3]);
-        int *array;
+        long n = atol(argv[3]);
+        long *array = NULL;
         struct timespec t1, t2;
 
         switch (generatorAlgo)
@@ -94,12 +95,12 @@ int main(int argc, char const *argv[])
             break;
         case 4:
             clock_gettime(CLOCK_MONOTONIC, &t1);
-            triRapidePivotArbitraire(array, 0, n-1);
+            quickSortIterativeArbitraire(array, 0, n-1);
             clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         case 5:
             clock_gettime(CLOCK_MONOTONIC, &t1);
-            triRapidePivotAleatoire(array, 0, n-1);
+            quickSortIterativeAleatoire(array, 0, n-1);
             clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         case 6:
@@ -108,8 +109,7 @@ int main(int argc, char const *argv[])
             clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         }
-        long ns = (long) ((((double)t2.tv_sec + 1.0e-9*t2.tv_nsec) - ((double)t1.tv_sec + 1.0e-9*t1.tv_nsec)) * 1000000000);
-        printf("%ld\n", ns);
+        long ns = (long) ((((double)t2.tv_sec + 1.0e-9*t2.tv_nsec) - ((double)t1.tv_sec + 1.0e-9*t1.tv_nsec)) * 1000000000);printf("%ld\n", ns);
     }
     return 0;
 }

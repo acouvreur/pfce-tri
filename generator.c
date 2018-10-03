@@ -4,16 +4,16 @@
 
 #include "generator.h"
 
-int *initializeArray(int n)
+long *initializeArray(long n)
 {
-    return (int *)malloc(sizeof(int) * n);
+    return (long *)malloc(sizeof(long) * n);
 }
 
-int *generateSortedArray(int n)
+long *generateSortedArray(long n)
 {
-    int *array = initializeArray(n);
+    long *array = initializeArray(n);
 
-    for (int i = 0; i < n; i++)
+    for (long i = 0; i < n; i++)
     {
         array[i] = i;
     }
@@ -21,11 +21,11 @@ int *generateSortedArray(int n)
     return array;
 }
 
-int *generateReverseSortedArray(int n)
+long *generateReverseSortedArray(long n)
 {
-    int *array = initializeArray(n);
+    long *array = initializeArray(n);
 
-    for (int i = 1; i <= n; i++)
+    for (long i = 1; i <= n; i++)
     {
         array[i-1] = n - i;
     }
@@ -33,14 +33,14 @@ int *generateReverseSortedArray(int n)
     return array;
 }
 
-int *generateRandomizedArrayRangeN(int n)
+long *generateRandomizedArrayRangeN(long n)
 {
-    int *array = initializeArray(n);
+    long *array = initializeArray(n);
 
     time_t t;
     srand((unsigned)time(&t));
 
-    for (int i = 0; i < n; i++)
+    for (long i = 0; i < n; i++)
     {
         array[i] = rand() % n;
     }
@@ -48,33 +48,33 @@ int *generateRandomizedArrayRangeN(int n)
     return array;
 }
 
-int *generateRandomizedArrayRangeLogN(int n)
+long *generateRandomizedArrayRangeLogN(long n)
 {
-    int *array = initializeArray(n);
+    long *array = initializeArray(n);
 
     time_t t;
     srand((unsigned)time(&t));
 
     double dn = (double)n;
 
-    for (int i = 0; i < n; i++)
+    for (long i = 0; i < n; i++)
     {
-        array[i] = rand() % (int)log(dn);
+        array[i] = rand() % (long)log(dn);
     }
 
     return array;
 }
 
-int *generateRandomizedArrayRangeNSquare(int n)
+long *generateRandomizedArrayRangeNSquare(long n)
 {
-    int *array = initializeArray(n);
+    long *array = initializeArray(n);
 
     time_t t;
     srand((unsigned)time(&t));
 
-    int ns = n * n;
+    long ns = n * n;
 
-    for (int i = 0; i < n; i++)
+    for (long i = 0; i < n; i++)
     {
         array[i] = rand() % ns;
     }
@@ -82,11 +82,11 @@ int *generateRandomizedArrayRangeNSquare(int n)
     return array;
 }
 
-int *generateConstantArray(int n, int constant)
+long *generateConstantArray(long n, long constant)
 {
-    int *array = initializeArray(n);
+    long *array = initializeArray(n);
 
-    for (int i = 0; i < n; i++)
+    for (long i = 0; i < n; i++)
     {
         array[i] = constant;
     }

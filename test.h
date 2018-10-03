@@ -1,7 +1,7 @@
-int testTriInsertion();
-int testTriFusion();
-int testTriRapidePivotArbitraire();
-int testTriRapidePivotAleatoire();
-int testTriRapidePivotOptimal();
-int testTriParTas();
-int testQSort();
+long testTriInsertion();
+long testTriFusion();
+long testTriRapidePivotArbitraire();
+long testTriRapidePivotAleatoire();
+long testTriRapidePivotOptimal();
+long testTriParTas();
+long testQSort();

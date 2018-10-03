@@ -1,7 +1,10 @@
-void triInsertion(int *array, int size);
-void triFusion(int *array, int size);
-void triRapidePivotArbitraire(int *array, int start, int end);
-void triRapidePivotAleatoire(int *array, int start, int end);
-void triRapidePivotOptimal(int *array, int start, int end);
-void triParTas(int *tree, int size);
-void sort(int *array,int size);
+void triInsertion(long *array, long size);
+void triFusion(long *array, long size);
+void triRapidePivotArbitraire(long *array, long start, long end);
+void triRapidePivotAleatoire(long *array, long start, long end);
+void triRapidePivotOptimal(long *array, long start, long end);
+void quickSortIterative(long *array, long l, long h);
+void quickSortIterativeArbitraire(long *array, long l, long h);
+void quickSortIterativeAleatoire(long *array, long l, long h);
+void triParTas(long *tree, long size);
+void sort(long *array,long size);

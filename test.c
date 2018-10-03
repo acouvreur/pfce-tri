@@ -3,85 +3,100 @@
 
 // Return 1 for success, 0 for failure
 
-int testTriInsertion() {
-	int * array = generateReverseSortedArray(100);
-	int * sorted = generateSortedArray(100);
+long testTriInsertion() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
 	triInsertion(array,100);
-	for(int i=0;i<100;i++){
+	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
-			return 0;
+			return 1;
 		}
 	}
-	return 1;
+	return 0;
 }
 
-int testTriFusion() {
-	int * array = generateReverseSortedArray(100);
-	int * sorted = generateSortedArray(100);
+long testTriFusion() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
 	triFusion(array,100);
-	for(int i=0;i<100;i++){
+	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
-			return 0;
+			return 1;
 		}
 	}
-	return 1;
+	return 0;
 }
 
-int testTriRapidePivotArbitraire() {
-	int * array = generateReverseSortedArray(100);
-	int * sorted = generateSortedArray(100);
+long testTriRapidePivotArbitraire() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
 	triRapidePivotArbitraire(array,0, 99);
-	for(int i=0;i<100;i++){
+	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
-			return 0;
+			return 2;
 		}
 	}
-	return 1;
+	array = generateReverseSortedArray(100);
+	quickSortIterativeArbitraire(array,0,99);
+	for(long i=0;i<100;i++){
+		if(array[i]!=sorted[i]){
+			return 1;
+		}
+	}
+	return 0;
 }
 
-int testTriRapidePivotAleatoire() {
-	int * array = generateReverseSortedArray(100);
-	int * sorted = generateSortedArray(100);
+long testTriRapidePivotAleatoire() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
 	triRapidePivotAleatoire(array,0,99);
-	for(int i=0;i<100;i++){
+	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
-			return 0;
+			return 1;
 		}
 	}
-	return 1;
+
+	array = generateReverseSortedArray(100);
+	quickSortIterativeAleatoire(array,0,99);
+	for(long i=0;i<100;i++){
+		if(array[i]!=sorted[i]){
+			return 2;
+		}
+	}
+	return 0;
 }
 
-int testTriRapidePivotOptimal() {
-	int * array = generateReverseSortedArray(100);
-	int * sorted = generateSortedArray(100);
+long testTriRapidePivotOptimal() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
 	triRapidePivotOptimal(array,0,99);
-	for(int i=0;i<100;i++){
+	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
-			return 0;
+			return 1;
 		}
 	}
-	return 1;
+	return 0;
 }
 
-int testTriParTas() {
-	int * array = generateReverseSortedArray(100);
-	int * sorted = generateSortedArray(100);
+long testTriParTas() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
 	triParTas(array,100);
-	for(int i=0;i<100;i++){
+	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
-			return 0;
+			return 1;
 		}
 	}
-	return 1;
+	return 0;
 }
-int testQSort() {
-	int * array = generateReverseSortedArray(100);
-	int * sorted = generateSortedArray(100);
+long testQSort() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
 	sort(array,100);
-	for(int i=0;i<100;i++){
+	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
-			return 0;
+			return 1;
 		}
 	}
-	return 1;
+	return 0;
 }

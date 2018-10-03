@@ -6,15 +6,15 @@
 
 int comp(const void *elem1, const void *elem2)
 {
-	int f = *((int *)elem1);
-	int s = *((int *)elem2);
+	long f = *((long *)elem1);
+	long s = *((long *)elem2);
 	return (f > s) - (f < s);
 }
 
-void triInsertion(int *array, int size)
+void triInsertion(long *array, long size)
 {
-	int x,j;
-	for (int i = 1; i < size; i++)
+	long x,j;
+	for (long i = 1; i < size; i++)
 	{
 		x=array[i];
 		j=i;
@@ -26,10 +26,10 @@ void triInsertion(int *array, int size)
 	}
 }
 
-void mergeArray(int* array1,int size1,int* array2,int size2,int* buffer){
-	int i = 0;
-	int y = 0;
-	for(int z=size1+size2-1;z>=0;z--){
+void mergeArray(long* array1,long size1,long* array2,long size2,long* buffer){
+	long i = 0;
+	long y = 0;
+	for(long z=size1+size2-1;z>=0;z--){
 		if(i==size1){
 			buffer[z]=array2[y];
 			y++;
@@ -46,7 +46,7 @@ void mergeArray(int* array1,int size1,int* array2,int size2,int* buffer){
 	}
 }
 
-void triFusion2(int *array, int size, int *buffer)
+void triFusion2(long *array, long size, long *buffer)
 {
 	if (size == 1)
 	{ //Tableau de taille 1 deja trie
@@ -55,11 +55,11 @@ void triFusion2(int *array, int size, int *buffer)
 	else
 	{
 		//Coupe tableau en 2
-		int newSize1 = size / 2;
-		int newSize2 = size / 2 + size % 2;
+		long newSize1 = size / 2;
+		long newSize2 = size / 2 + size % 2;
 
-		int *newArray1 = array;
-		int *newArray2 = array+newSize1;
+		long *newArray1 = array;
+		long *newArray2 = array+newSize1;
 		//Trie nouveau tableaux par recursion
 		triFusion2(newArray1, newSize1, buffer);
 		triFusion2(newArray2, newSize2, buffer+newSize1);
@@ -68,15 +68,15 @@ void triFusion2(int *array, int size, int *buffer)
 	}
 }
 
-void triFusion(int *array, int size)
+void triFusion(long *array, long size)
 {
 	if (size <= 1)
 	{ //Tableau de taille 1 deja trie
 		return;
 	}
-	int *buffer = malloc(sizeof(int) * size);
+	long *buffer = malloc(sizeof(long) * size);
 	triFusion2(array, size, buffer);
-	for (int i = 0; i < size; i++)
+	for (long i = 0; i < size; i++)
 	{
 		array[i] = buffer[i];
 	}
@@ -87,7 +87,7 @@ void triFusion(int *array, int size)
 /*---------------------------------------------------*/
 /*---------------------------------------------------*/
 
-int pivotArbitraire(int *array, int start, int end)
+long pivotArbitraire(long *array, long start, long end)
 {
 	// return start;
 	// return end;
@@ -95,26 +95,26 @@ int pivotArbitraire(int *array, int start, int end)
 	return start + ((end - start) / 2);
 }
 
-int pivotAleatoire(int *array, int start, int end)
+long pivotAleatoire(long *array, long start, long end)
 {
-	return (rand() % end) + start;
+	return (rand() % (end - start)) + start;
 }
 
-void swap(int *i, int *j)
+void swap(long *i, long *j)
 {
-	// printf("swap %d<=>%d\n", *i, *j);
-	int tmp = *i;
+	// prlongf("swap %d<=>%d\n", *i, *j);
+	long tmp = *i;
 	*i = *j;
 	*j = tmp;
-	// printf("swapresult %d<=>%d\n", *i, *j);
+	// prlongf("swapresult %d<=>%d\n", *i, *j);
 }
 
-int partitionner(int *array, int start, int end, int pivot)
+long partitionner(long *array, long start, long end, long pivot)
 {
-	// printf("swap indexes %d %d (from total range %d %d)\n", pivot, end, start, end);
+	// prlongf("swap indexes %d %d (from total range %d %d)\n", pivot, end, start, end);
 	swap(&array[pivot], &array[end]);
 
-	for (int i = start; i < end; i++)
+	for (long i = start; i < end; i++)
 	{
 		if (array[i] <= array[end])
 		{
@@ -126,9 +126,9 @@ int partitionner(int *array, int start, int end, int pivot)
 	return start;
 }
 
-void triRapidePivotArbitraire(int *array, int start, int end)
+void triRapidePivotArbitraire(long *array, long start, long end)
 {
-	int pivot;
+	long pivot;
 	if (start < end)
 	{
 		pivot = pivotArbitraire(array, start, end);
@@ -138,9 +138,9 @@ void triRapidePivotArbitraire(int *array, int start, int end)
 	}
 }
 
-void triRapidePivotAleatoire(int *array, int start, int end)
+void triRapidePivotAleatoire(long *array, long start, long end)
 {
-	int pivot;
+	long pivot;
 	if (start < end)
 	{
 		pivot = pivotAleatoire(array, start, end);
@@ -150,9 +150,9 @@ void triRapidePivotAleatoire(int *array, int start, int end)
 	}
 }
 
-void triRapidePivotOptimal(int *array, int start, int end)
+void triRapidePivotOptimal(long *array, long start, long end)
 {
-	int pivot;
+	long pivot;
 	if (start < end)
 	{
 		pivot = pivotArbitraire(array, start, end); //TODO: change to call optimal pivot
@@ -162,12 +162,155 @@ void triRapidePivotOptimal(int *array, int start, int end)
 	}
 }
 
+void quickSortIterativeAleatoire (long arr[], long l, long h) 
+{ 
+    // Create an auxiliary stack 
+    long stack[ h - l + 1 ]; 
+  
+    // initialize top of stack 
+    long top = -1; 
+  
+    // push initial values of l and h to stack 
+    stack[ ++top ] = l; 
+    stack[ ++top ] = h; 
+  
+    // Keep popping from stack while is not empty 
+    while ( top >= 0 ) 
+    { 
+        // Pop h and l 
+        h = stack[ top-- ]; 
+        l = stack[ top-- ]; 
+  
+        // Set pivot element at its correct position 
+        // in sorted array 
+        long p = pivotAleatoire(arr, l, h);
+		p = partitionner(arr, l, h, p);
+  
+        // If there are elements on left side of pivot, 
+        // then push left side to stack 
+        if ( p-1 > l ) 
+        { 
+            stack[ ++top ] = l; 
+            stack[ ++top ] = p - 1; 
+        } 
+  
+        // If there are elements on right side of pivot, 
+        // then push right side to stack 
+        if ( p+1 < h ) 
+        { 
+            stack[ ++top ] = p + 1; 
+            stack[ ++top ] = h; 
+        } 
+    } 
+} 
 
-void tamiser(int *tree, int node, int n)
+void quickSortIterativeArbitraire (long arr[], long l, long h) 
+{ 
+    // Create an auxiliary stack 
+    long stack[ h - l + 1 ]; 
+  
+    // initialize top of stack 
+    long top = -1; 
+  
+    // push initial values of l and h to stack 
+    stack[ ++top ] = l; 
+    stack[ ++top ] = h; 
+  
+    // Keep popping from stack while is not empty 
+    while ( top >= 0 ) 
+    { 
+        // Pop h and l 
+        h = stack[ top-- ]; 
+        l = stack[ top-- ]; 
+  
+        // Set pivot element at its correct position 
+        // in sorted array 
+        long p = pivotArbitraire(arr, l, h);
+		p = partitionner(arr, l, h, p);
+  
+        // If there are elements on left side of pivot, 
+        // then push left side to stack 
+        if ( p-1 > l ) 
+        { 
+            stack[ ++top ] = l; 
+            stack[ ++top ] = p - 1; 
+        } 
+  
+        // If there are elements on right side of pivot, 
+        // then push right side to stack 
+        if ( p+1 < h ) 
+        { 
+            stack[ ++top ] = p + 1; 
+            stack[ ++top ] = h; 
+        } 
+    } 
+} 
+
+
+int partition (long arr[], long l, long h) 
+{ 
+    long x = arr[h]; 
+    long i = (l - 1); 
+  
+    for (long j = l; j <= h- 1; j++) 
+    { 
+        if (arr[j] <= x) 
+        { 
+            i++; 
+            swap (&arr[i], &arr[j]); 
+        } 
+    } 
+    swap (&arr[i + 1], &arr[h]); 
+    return (i + 1); 
+} 
+
+void quickSortIterative (long arr[], long l, long h) 
+{ 
+    // Create an auxiliary stack 
+    long stack[ h - l + 1 ]; 
+  
+    // initialize top of stack 
+    long top = -1; 
+  
+    // push initial values of l and h to stack 
+    stack[ ++top ] = l; 
+    stack[ ++top ] = h; 
+  
+    // Keep popping from stack while is not empty 
+    while ( top >= 0 ) 
+    { 
+        // Pop h and l 
+        h = stack[ top-- ]; 
+        l = stack[ top-- ]; 
+  
+        // Set pivot element at its correct position 
+        // in sorted array 
+        long p = partition( arr, l, h ); 
+  
+        // If there are elements on left side of pivot, 
+        // then push left side to stack 
+        if ( p-1 > l ) 
+        { 
+            stack[ ++top ] = l; 
+            stack[ ++top ] = p - 1; 
+        } 
+  
+        // If there are elements on right side of pivot, 
+        // then push right side to stack 
+        if ( p+1 < h ) 
+        { 
+            stack[ ++top ] = p + 1; 
+            stack[ ++top ] = h; 
+        } 
+    } 
+} 
+
+
+void tamiser(long *tree, long node, long n)
 {
-	int k = node;
-	int j = 2 * k;
-	int tmp;
+	long k = node;
+	long j = 2 * k;
+	long tmp;
 	while (j <= n)
 	{
 		if (j < n && tree[j - 1] < tree[j])
@@ -189,14 +332,14 @@ void tamiser(int *tree, int node, int n)
 	}
 }
 
-void triParTas(int *tree, int size)
+void triParTas(long *tree, long size)
 {
-	for (int i = size / 2; i >= 1; i--)
+	for (long i = size / 2; i >= 1; i--)
 	{
 		tamiser(tree, i, size);
 	}
-	int tmp;
-	for (int i = size; i >= 2; i--)
+	long tmp;
+	for (long i = size; i >= 2; i--)
 	{
 		tmp = tree[i - 1];
 		tree[i - 1] = tree[0];
@@ -205,7 +348,7 @@ void triParTas(int *tree, int size)
 	}
 }
 
-void sort(int *array,int size)
+void sort(long *array,long size)
 {
-	qsort(array, size, sizeof(int), comp);
+	qsort(array, size, sizeof(long), comp);
 }
