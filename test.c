@@ -74,3 +74,14 @@ int testTriParTas() {
 	}
 	return 1;
 }
+int testQSort() {
+	int * array = generateReverseSortedArray(100);
+	int * sorted = generateSortedArray(100);
+	sort(array,100);
+	for(int i=0;i<100;i++){
+		if(array[i]!=sorted[i]){
+			return 0;
+		}
+	}
+	return 1;
+}

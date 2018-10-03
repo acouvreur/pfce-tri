@@ -4,3 +4,4 @@ int testTriRapidePivotArbitraire();
 int testTriRapidePivotAleatoire();
 int testTriRapidePivotOptimal();
 int testTriParTas();
+int testQSort();
