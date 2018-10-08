@@ -100,3 +100,15 @@ long testQSort() {
 	}
 	return 0;
 }
+
+long testSmoothSort() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
+	smoothSort(array,100);
+	for(long i=0;i<100;i++){
+		if(array[i]!=sorted[i]){
+			return 1;
+		}
+	}
+	return 0;
+}

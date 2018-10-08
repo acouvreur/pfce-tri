@@ -38,9 +38,13 @@ int main(int argc, char const *argv[])
         {
             fprintf(stderr, "Erreur testTriParTas (%d)\n", err);
         }
-		if (testQSort())
+		if ((err=testQSort()))
         {
             fprintf(stderr, "Erreur testQSort (%d)\n", err);
+        }
+		if ((err=testSmoothSort()))
+        {
+            fprintf(stderr, "Erreur testSmoothSort (%d)\n", err);
         }
     }
     else if (argc != 4)

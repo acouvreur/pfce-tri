@@ -5,3 +5,4 @@ long testTriRapidePivotAleatoire();
 long testTriRapidePivotOptimal();
 long testTriParTas();
 long testQSort();
+long testSmoothSort();
