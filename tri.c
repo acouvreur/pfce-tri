@@ -353,3 +353,147 @@ void sort(long *array,long size)
 {
 	qsort(array, size, sizeof(long), comp);
 }
+
+long lsr(long x, long n)
+{
+  return (long)((unsigned long)x >> n);
+}
+
+long numberOfTrailingZeros(long x){
+	long counter=0;
+	while(x % 2 == 0){
+		counter++;
+		x /= 2;
+	}
+	return counter;
+}
+
+void smoothSortSift(long * array,long size, long pshift, long head,long *smoothSortLP) { 
+        long val = array[head]; 
+ 
+        while (pshift > 1) { 
+            long rt = head - 1; 
+            long lf = head - 1 - smoothSortLP[pshift - 2]; 
+ 
+            if (val >= array[lf] && val >= array[rt]) 
+                break; 
+            if (array[lf] >= array[rt]) { 
+                array[head]= array[lf]; 
+                head = lf; 
+                pshift -= 1; 
+            } else { 
+                array[head]= array[rt];
+                head = rt; 
+                pshift -= 2; 
+            } 
+        } 
+ 
+        array[head]=val; 
+    } 
+
+void smoothSortTrinkle(long * array,long size, long p, long pshift, long head, int isTrusty,long *smoothSortLP) { 
+        long val = array[head]; 
+ 
+        while (p != 1) { 
+            long stepson = head - smoothSortLP[pshift]; 
+ 
+            if (array[stepson]<= val) 
+                break; // current node is greater than head. Sift. 
+ 
+            // no need to check this if we know the current node is trusty, 
+            // because we just checked the head (which is val, in the first 
+            // iteration) 
+            if (!isTrusty && pshift > 1) { 
+                long rt = head - 1; 
+                long lf = head - 1 - smoothSortLP[pshift - 2]; 
+                if (array[rt] >= array[stepson]
+                        || array[lf] >= array[stepson]) 
+                    break; 
+            } 
+ 
+            array[head]=array[stepson]; 
+ 
+            head = stepson; 
+            long trail = numberOfTrailingZeros(p & ~1); 
+            p = lsr(p,trail); 
+            pshift += trail; 
+            isTrusty = 0; 
+        } 
+ 
+        if (!isTrusty) { 
+            array[head] = val; 
+            smoothSortSift(array,size, pshift, head,smoothSortLP); 
+        } 
+}
+
+void smoothSort2(long *array,long size,long lo,long hi,long * smoothSortLP){
+	long head = lo;
+	long p = 1;
+	long pshift = 1; 
+	while (head < hi) { 
+		if ((p & 3) == 3) { 
+			// Add 1 by merging the first two blocks into a larger one. 
+			// The next Leonardo number is one bigger. 
+			smoothSortSift(array,size, pshift, head,smoothSortLP); 
+			p = lsr(p,2); 
+			pshift += 2; 
+		} else { 
+			// adding a new block of length 1 
+			if (smoothSortLP[pshift - 1] >= hi - head) { 
+			    // this block is its final size. 
+			    smoothSortTrinkle(array,size, p, pshift, head, 0,smoothSortLP); 
+			} else { 
+			    // this block will get merged. Just make it trusty. 
+			    smoothSortSift(array,size, pshift, head,smoothSortLP);
+			} 
+ 
+			if (pshift == 1) { 
+				// smoothSortLP[1] is being used, so we add use smoothSortLP[0] 
+				p <<= 1; 
+				pshift--; 
+			} else { 
+				// shift out to position 1, add smoothSortLP[1] 
+				p <<= (pshift - 1); 
+				pshift = 1; 
+			} 
+		} 
+		p |= 1; 
+		head++; 
+    }
+	smoothSortTrinkle(array, size, p, pshift, head, 0,smoothSortLP); 
+	
+	while (pshift != 1 || p != 1) { 
+		if (pshift <= 1) { 
+			// block of length 1. No fiddling needed 
+			long trail = numberOfTrailingZeros(p & ~1); 
+			p = lsr(p, trail); 
+			pshift += trail; 
+		} else { 
+			p <<= 2; 
+			p ^= 7; 
+			pshift -= 2; 
+			smoothSortTrinkle(array, size, lsr(p,1), pshift + 1, head - smoothSortLP[pshift] - 1, 1,smoothSortLP); 
+			smoothSortTrinkle(array, size, p, pshift, head - 1, 1,smoothSortLP); 
+		} 
+		head--; 
+	} 
+}
+
+void smoothSort(long *array,long size){
+	if(size > 1){
+		long smoothSortLP[] = {1, 1, 3, 5, 9, 15, 25, 41, 67, 109, 
+            177, 287, 465, 753, 1219, 1973, 3193, 5167, 8361, 13529, 21891, 
+            35421, 57313, 92735, 150049, 242785, 392835, 635621, 1028457, 
+            1664079, 2692537, 4356617, 7049155, 11405773, 18454929, 29860703, 
+            48315633, 78176337, 126491971, 204668309, 331160281, 535828591, 
+            866988873 // the next number is > 31 bits. 
+		};
+		smoothSort2(array, size, 0, size - 1,smoothSortLP); 
+	}
+}
+
+
+
+
+
+
