@@ -30,9 +30,9 @@ int main(int argc, char const *argv[])
         {
             fprintf(stderr, "Erreur testTriRapidePivotAleatoire (%d)\n", err);
         }
-        if ((err=testTriRapidePivotOptimal()))
+        if ((err=testTriRapidePivotMed3()))
         {
-            fprintf(stderr, "Erreur testTriRapidePivotOptimal (%d)\n", err);
+            fprintf(stderr, "Erreur testTriRapidePivotMed3 (%d)\n", err);
         }
         if ((err=testTriParTas()))
         {
@@ -110,6 +110,16 @@ int main(int argc, char const *argv[])
         case 6:
             clock_gettime(CLOCK_MONOTONIC, &t1);
             sort(array, n);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
+            break;
+		case 7:
+            clock_gettime(CLOCK_MONOTONIC, &t1);
+            quickSortIterativeMed3(array,0, n-1);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
+            break;
+		case 8:
+            clock_gettime(CLOCK_MONOTONIC, &t1);
+            smoothSort(array, n);
             clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
         }

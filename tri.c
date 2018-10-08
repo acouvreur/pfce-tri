@@ -101,6 +101,8 @@ long pivotAleatoire(long *array, long start, long end)
 	return (rand() % (end - start)) + start;
 }
 
+
+
 void swap(long *i, long *j)
 {
 	// prlongf("swap %d<=>%d\n", *i, *j);
@@ -109,6 +111,22 @@ void swap(long *i, long *j)
 	*j = tmp;
 	// prlongf("swapresult %d<=>%d\n", *i, *j);
 }
+
+long medianOf3(long * intArray, long left, long right) {
+    int center = (left + right) / 2;
+
+    if (intArray[left] > intArray[center])
+      swap(&intArray[left], &intArray[center]);
+
+    if (intArray[left] > intArray[right])
+      swap(&intArray[left], &intArray[right]);
+
+    if (intArray[center] > intArray[right])
+      swap(&intArray[center], &intArray[right]);
+
+    swap(&intArray[center], &intArray[right-1]);
+    return intArray[right - 1];
+  }
 
 long partitionner(long *array, long start, long end, long pivot)
 {
@@ -145,6 +163,18 @@ void triRapidePivotAleatoire(long *array, long start, long end)
 	if (start < end)
 	{
 		pivot = pivotAleatoire(array, start, end);
+		pivot = partitionner(array, start, end, pivot);
+		triRapidePivotArbitraire(array, start, pivot - 1);
+		triRapidePivotArbitraire(array, pivot + 1, end);
+	}
+}
+
+void triRapidePivotMed3(long *array, long start, long end)
+{
+	long pivot;
+	if (start < end)
+	{
+		pivot = medianOf3(array, start, end);
 		pivot = partitionner(array, start, end, pivot);
 		triRapidePivotArbitraire(array, start, pivot - 1);
 		triRapidePivotArbitraire(array, pivot + 1, end);
@@ -204,6 +234,48 @@ void quickSortIterativeAleatoire (long arr[], long l, long h)
         } 
     } 
 } 
+
+void quickSortIterativeMed3 (long arr[], long l, long h) 
+{ 
+    // Create an auxiliary stack 
+    long stack[ h - l + 1 ]; 
+  
+    // initialize top of stack 
+    long top = -1; 
+  
+    // push initial values of l and h to stack 
+    stack[ ++top ] = l; 
+    stack[ ++top ] = h; 
+  
+    // Keep popping from stack while is not empty 
+    while ( top >= 0 ) 
+    { 
+        // Pop h and l 
+        h = stack[ top-- ]; 
+        l = stack[ top-- ]; 
+  
+        // Set pivot element at its correct position 
+        // in sorted array 
+        long p = medianOf3(arr, l, h);
+		p = partitionner(arr, l, h, p);
+  
+        // If there are elements on left side of pivot, 
+        // then push left side to stack 
+        if ( p-1 > l ) 
+        { 
+            stack[ ++top ] = l; 
+            stack[ ++top ] = p - 1; 
+        } 
+  
+        // If there are elements on right side of pivot, 
+        // then push right side to stack 
+        if ( p+1 < h ) 
+        { 
+            stack[ ++top ] = p + 1; 
+            stack[ ++top ] = h; 
+        } 
+    } 
+}
 
 void quickSortIterativeArbitraire (long arr[], long l, long h) 
 { 

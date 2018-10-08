@@ -78,6 +78,18 @@ long testTriRapidePivotOptimal() {
 	return 0;
 }
 
+long testTriRapidePivotMed3() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
+	triRapidePivotMed3(array,0,99);
+	for(long i=0;i<100;i++){
+		if(array[i]!=sorted[i]){
+			return 1;
+		}
+	}
+	return 0;
+}
+
 long testTriParTas() {
 	long * array = generateReverseSortedArray(100);
 	long * sorted = generateSortedArray(100);
