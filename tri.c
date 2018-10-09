@@ -277,6 +277,53 @@ void quickSortIterativeMed3 (long arr[], long l, long h)
     } 
 }
 
+void quickSortIterativeMed3Seuil (long arr[], long l, long h, long seuil) 
+{ 
+    // Create an auxiliary stack 
+    long stack[ h - l + 1 ]; 
+	long size = h - l + 1 ;
+  
+    // initialize top of stack 
+    long top = -1; 
+  
+    // push initial values of l and h to stack 
+    stack[ ++top ] = l; 
+    stack[ ++top ] = h; 
+  
+    // Keep popping from stack while is not empty 
+    while ( top >= 0 ) 
+    { 
+		if(top>=seuil){
+			triInsertion(arr,size);
+			return;
+		}
+        // Pop h and l 
+        h = stack[ top-- ]; 
+        l = stack[ top-- ]; 
+  
+        // Set pivot element at its correct position 
+        // in sorted array 
+        long p = medianOf3(arr, l, h);
+		p = partitionner(arr, l, h, p);
+  
+        // If there are elements on left side of pivot, 
+        // then push left side to stack 
+        if ( p-1 > l ) 
+        { 
+            stack[ ++top ] = l; 
+            stack[ ++top ] = p - 1; 
+        } 
+  
+        // If there are elements on right side of pivot, 
+        // then push right side to stack 
+        if ( p+1 < h ) 
+        { 
+            stack[ ++top ] = p + 1; 
+            stack[ ++top ] = h; 
+        } 
+    } 
+}
+
 void quickSortIterativeArbitraire (long arr[], long l, long h) 
 { 
     // Create an auxiliary stack 

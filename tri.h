@@ -10,4 +10,3 @@ void quickSortIterativeAleatoire(long *array, long l, long h);
 void quickSortIterativeMed3(long *array, long l, long h);
 void triParTas(long *tree, long size);
 void sort(long *array,long size);
-void smoothSort(long *array,long size);

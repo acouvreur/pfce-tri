@@ -1,6 +1,7 @@
 #include "tri.h"
 #include "test.h"
 #include "generator.h"
+#include "smoothsort.h"
 
 #define _POSIX_C_SOURCE 199309L
 
