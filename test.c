@@ -1,5 +1,6 @@
 #include "generator.h"
 #include "tri.h"
+#include "smoothsort.h"
 
 // Return 1 for success, 0 for failure
 
