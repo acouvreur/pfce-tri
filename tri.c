@@ -26,6 +26,21 @@ void triInsertion(long *array, long size)
 	}
 }
 
+void triInsertion2(long *array, long l, long h)
+{
+	long x,j;
+	for (long i = l+1; i < h; i++)
+	{
+		x=array[i];
+		j=i;
+		while (j>l && array[j-1]>x){
+			array[j]=array[j-1];
+			j--;
+		}
+		array[j]=x;
+	}
+}
+
 void mergeArray(long* array1,long size1,long* array2,long size2,long* buffer){
 	long i = 0;
 	long y = 0;
@@ -125,7 +140,7 @@ long medianOf3(long * intArray, long left, long right) {
       swap(&intArray[center], &intArray[right]);
 
     swap(&intArray[center], &intArray[right-1]);
-    return intArray[right - 1];
+    return right - 1;
   }
 
 long partitionner(long *array, long start, long end, long pivot)
@@ -277,11 +292,11 @@ void quickSortIterativeMed3 (long arr[], long l, long h)
     } 
 }
 
-void quickSortIterativeMed3Seuil (long arr[], long l, long h, long seuil) 
+void quickSortIterativeMed3Threshold (long arr[], long l, long h, long threshold) 
 { 
     // Create an auxiliary stack 
     long stack[ h - l + 1 ]; 
-	long size = h - l + 1 ;
+	// long size = h - l + 1 ;
   
     // initialize top of stack 
     long top = -1; 
@@ -293,19 +308,21 @@ void quickSortIterativeMed3Seuil (long arr[], long l, long h, long seuil)
     // Keep popping from stack while is not empty 
     while ( top >= 0 ) 
     { 
-		if(top>=seuil){
-			triInsertion(arr,size);
-			return;
-		}
+		
         // Pop h and l 
         h = stack[ top-- ]; 
         l = stack[ top-- ]; 
-  
+
         // Set pivot element at its correct position 
         // in sorted array 
         long p = medianOf3(arr, l, h);
-		p = partitionner(arr, l, h, p);
   
+        // Threshold test
+        if(h - l < threshold){
+			triInsertion2(arr,l, h);
+		} else {
+		    p = partitionner(arr, l, h, p);
+        }
         // If there are elements on left side of pivot, 
         // then push left side to stack 
         if ( p-1 > l ) 

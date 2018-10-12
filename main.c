@@ -48,9 +48,9 @@ int main(int argc, char const *argv[])
             fprintf(stderr, "Erreur testSmoothSort (%d)\n", err);
         }
     }
-    else if (argc != 4)
+    else if (argc != 5)
     {
-        fprintf(stderr, "Usage: main <sortingAlgo> <generatingAlgo> <arraySize>\n");
+        fprintf(stderr, "Usage: main <sortingAlgo> <generatingAlgo> <arraySize> <threshold>\n");
         return 1;
     }
     else
@@ -58,6 +58,7 @@ int main(int argc, char const *argv[])
         int sortingAlgo = atoi(argv[1]);
         int generatorAlgo = atoi(argv[2]);
         long n = atol(argv[3]);
+        long threshold = atol(argv[4]);
         long *array = NULL;
         struct timespec t1, t2;
 
@@ -124,7 +125,13 @@ int main(int argc, char const *argv[])
             smoothSort(array, n);
             clock_gettime(CLOCK_MONOTONIC, &t2);
             break;
+        case 9:
+            clock_gettime(CLOCK_MONOTONIC, &t1);
+            quickSortIterativeMed3Threshold(array, 0, n-1, threshold);
+            clock_gettime(CLOCK_MONOTONIC, &t2);
+            break;
         }
+        
         
         long ns = (long) ((((double)t2.tv_sec + 1.0e-9*t2.tv_nsec) - ((double)t1.tv_sec + 1.0e-9*t1.tv_nsec)) * 1000000000);
         printf("%ld\n", ns);
