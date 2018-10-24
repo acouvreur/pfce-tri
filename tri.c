@@ -29,14 +29,14 @@ void triInsertion(long *array, long size)
 void mergeArray(long* array1,long size1,long* array2,long size2,long* buffer){
 	long i = 0;
 	long y = 0;
-	for(long z=size1+size2-1;z>=0;z--){
+	for(long z=0;z<size1+size2;z++){
 		if(i==size1){
 			buffer[z]=array2[y];
 			y++;
 		}else if(y==size2){
 			buffer[z]=array1[i];
 			i++;
-		}else if(array1[i] > array2[y]){
+		}else if(array1[i] < array2[y]){
 			buffer[z]=array1[i];
 			i++;
 		}else {
@@ -61,8 +61,8 @@ void triFusion2(long *array, long size, long *buffer)
 		long *newArray1 = array;
 		long *newArray2 = array+newSize1;
 		//Trie nouveau tableaux par recursion
-		triFusion2(newArray1, newSize1, buffer);
-		triFusion2(newArray2, newSize2, buffer+newSize1);
+		triFusion2(buffer, newSize1, newArray1);
+		triFusion2(buffer+newSize1, newSize2, newArray2);
 		//Fusion des 2 tableau trie
 		mergeArray(newArray1,newSize1,newArray2,newSize2,buffer);
 
@@ -76,11 +76,11 @@ void triFusion(long *array, long size)
 		return;
 	}
 	long *buffer = malloc(sizeof(long) * size);
-	triFusion2(array, size, buffer);
 	for (long i = 0; i < size; i++)
 	{
-		array[i] = buffer[i];
+		buffer[i] = array[i];
 	}
+	triFusion2(buffer, size, array);
 }
 
 /*---------------------------------------------------*/
