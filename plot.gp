@@ -1,20 +1,16 @@
 set ylabel "Temps en nanoseconde"
-set logscale y 10
 set logscale x 2
-set xlabel "Taille des donnees n"
+set xlabel "Taille des données n"
 
-gen = "sortedArray reverseSortedArray constantArray randomizedArrayRangeN randomizedArrayRangeNSquare randomizedArrayRangeNSquare"
-tris = "triInsertion triFusion triParTas triRapidePivotArbitraire triRapidePivotAleatoire sortBuiltIn"
+gen = "sortedArray reverseSortedArray constantArray randomizedArrayRangeN randomizedArrayRangeLogN randomizedArrayRangeNSquare"
+tris = "Insertion Fusion Tas QuickSortArbitrary QuickSortRandom SortC QuickSortIterMed3 Smooth QuickSortIterMed3Threshold"
 
 set title "Evaluation du temps de tri ".word(gen, gen_algo)
-
-
+set key top left
 
 # plot "benchmark.dat" using 3:4
-plot for [i=1:6] 'data/benchmark_'.i.'_'.gen_algo.'.dat' using 3:4 smooth unique title word(tris, i)
+plot for [i=1:8] 'data/benchmark_'.i.'_'.gen_algo.'.dat' using 3:4 with linespoints title word(tris, i)
 
-pause -1 "Hit any key to continue"
-
-set term png
-set output 'output/benchmark_'.gen_algo.'.png'
+set term pdfcairo size 10in,5in;
+set output 'output/benchmark_'.gen_algo.'.pdf'
 replot

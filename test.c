@@ -1,6 +1,7 @@
 #include "generator.h"
 #include "tri.h"
-
+#include "smoothsort.h"
+#include <stdio.h>
 // Return 1 for success, 0 for failure
 
 long testTriInsertion() {
@@ -78,6 +79,28 @@ long testTriRapidePivotOptimal() {
 	return 0;
 }
 
+long testTriRapidePivotMed3() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
+	triRapidePivotMed3(array,0,99);
+	for(long i=0;i<100;i++){
+		if(array[i]!=sorted[i]){
+			return 1;
+		}
+	}
+
+	array = generateReverseSortedArray(100);
+	quickSortIterativeMed3Threshold(array, 0, 99, 10);
+	for(long i=0;i<100;i++){
+		printf("%ld ", array[i]);
+		if(array[i]!=sorted[i]){
+			return 2;
+		}
+	}
+
+	return 0;
+}
+
 long testTriParTas() {
 	long * array = generateReverseSortedArray(100);
 	long * sorted = generateSortedArray(100);
@@ -93,6 +116,18 @@ long testQSort() {
 	long * array = generateReverseSortedArray(100);
 	long * sorted = generateSortedArray(100);
 	sort(array,100);
+	for(long i=0;i<100;i++){
+		if(array[i]!=sorted[i]){
+			return 1;
+		}
+	}
+	return 0;
+}
+
+long testSmoothSort() {
+	long * array = generateReverseSortedArray(100);
+	long * sorted = generateSortedArray(100);
+	smoothSort(array,100);
 	for(long i=0;i<100;i++){
 		if(array[i]!=sorted[i]){
 			return 1;
